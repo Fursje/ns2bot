@@ -1,0 +1,14 @@
+{
+    "name": "fursje/ns2bot",
+    "description": "test bot",
+    "authors": [
+        {
+            "name": "Fursje",
+            "email": ""
+        }
+    ],
+    "require": {
+        "team-reflex/discord-php": "^4.0",
+        "koraktor/steam-condenser": "^1.3"
+    }
+}
