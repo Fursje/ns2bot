@@ -5,7 +5,9 @@ class ns2 {
 	public function replyServer($data) {
                 return $reply = sprintf("%s :: Map: %s :: %s/%s :: %s:%s", $data['info']['serverName'], $data['info']['mapName'], $data['info']['numberOfPlayers'], $data['info']['maxPlayers'], $data['host'],$data['port']-1);
 	}	
-
+	public function replyServerv2($data) {
+                return $reply = sprintf("%s :: Map: %s :: %s/%s :: %s:%s", $data['serverName'], $data['mapName'], $data['numberOfPlayers'], $data['maxPlayers'], $data['host'],$data['port']-1);
+	}	
 	public function getDetails($host,$port,$retry = 3, $getPlayers = False, $getRules = True) {
 		$serverInfo = array();
 		$serverInfo['host'] = $host;
@@ -15,6 +17,8 @@ class ns2 {
 		while ( $retry_count <= $retry) {
 			try {
 				$serverInfo['info'] = $serverData->getServerInfo();
+				$serverInfo['info']['host'] = $host;
+				$serverInfo['info']['port'] = $port;
 				break;
 			} catch (Exception $e) {
 				$retry_count++;

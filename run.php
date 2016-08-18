@@ -38,7 +38,29 @@ $discord->on('ready', function ($discord) {
 		$reply = $ns2->replyServer($ns2->getDetails("85.195.247.117","27030"));
 		$message->reply($reply);
 	}
-
+	if ($message->content == "?wooza") {
+		$servers = array(
+			array('ip' => '85.195.247.117', 'port' => '27016'),
+			array('ip' => '85.195.247.117', 'port' => '27018'),
+			array('ip' => '85.195.247.117', 'port' => '27020'),
+			array('ip' => '85.195.247.117', 'port' => '27034'),
+			array('ip' => '85.195.247.117', 'port' => '27036'),
+			array('ip' => '85.195.247.117', 'port' => '27030'),
+		);
+		$reply = array();
+		$srv = array();
+		foreach ($servers as $k =>$v) {
+			$tmp = $ns2->getDetails($v['ip'],$v['port']);
+			$srv[] = $tmp['info'];
+		}
+		usort($srv,function ($a,$b) {
+			return $b['numberOfPlayers'] - $a['numberOfPlayers'];
+		});
+		foreach ($srv as $k =>$v) {
+			$reply[] = $ns2->replyServerv2($v);
+		}
+		$message->reply(sprintf("```%s```",implode("\n",$reply)));
+	}
     });
 });
 
